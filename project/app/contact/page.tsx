@@ -24,105 +24,111 @@ export default function Contact() {
   };
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-gray-50 text-gray-800">
+      {/* Hero Section */}
       <section
-  className="hero-section min-h-screen flex items-center bg-cover bg-center bg-no-repeat relative py-20"
-  style={{backgroundImage: "url('image/bg.jpeg')"}} // replace with your actual image path
->
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-6xl font-bold text-center text-white">Contact Us</h1>
+        className="min-h-[60vh] flex items-center justify-center bg-cover bg-center relative"
+        style={{ backgroundImage: "url('image/bg.jpeg')" }}
+      >
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="relative z-10 text-center px-4">
+          <motion.h1
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl sm:text-5xl font-bold text-white"
+          >
+            Contact <span className="text-orange-400">Us</span>
+          </motion.h1>
         </div>
       </section>
 
-      <section className="section-padding">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
-              <div className="space-y-4">
-                <p>
-                  <strong>Address:</strong><br />
-                  #1 Soula Street, Cantonments Accra<br />
-                  P.O.Box OS 2044<br />
-                  Osu-Accra
-                </p>
-                <p>
-                  <strong>Phone:</strong><br />
-                  +23324435449<br />
-                  +233246705184
-                </p>
-                <p>
-                  <strong>Email:</strong><br />
-                  info@raysktadenergy.com
-                </p>
-              </div>
-            </motion.div>
+      {/* Contact Content */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+          {/* Info Panel */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">Get in Touch</h2>
+            <div className="space-y-6 text-lg text-gray-700">
+              <p>
+                <strong className="block text-gray-900">Address:</strong>
+                #1 Soula Street, Cantonments Accra<br />
+                P.O.Box OS 2044, Osu-Accra
+              </p>
+              <p>
+                <strong className="block text-gray-900">Phone:</strong>
+                +23324435449<br />
+                +233246705184
+              </p>
+              <p>
+                <strong className="block text-gray-900">Email:</strong>
+                info@raysktadenergy.com
+              </p>
+            </div>
+          </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {status.message && (
-                  <div className={`p-4 rounded-md ${status.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-                    {status.message}
-                  </div>
-                )}
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+          {/* Form Panel */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-lg space-y-6">
+              {status.message && (
+                <div
+                  className={`p-4 rounded-md text-sm font-medium ${
+                    status.type === 'success'
+                      ? 'bg-green-100 text-green-700'
+                      : 'bg-red-100 text-red-700'
+                  }`}
+                >
+                  {status.message}
+                </div>
+              )}
+              {['name', 'email', 'subject'].map((field) => (
+                <div key={field}>
+                  <label htmlFor={field} className="block text-sm font-semibold text-gray-700 capitalize">
+                    {field}
+                  </label>
                   <input
-                    type="text"
-                    id="name"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    type={field === 'email' ? 'email' : 'text'}
+                    id={field}
+                    className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                    value={formData[field as keyof typeof formData]}
+                    onChange={(e) =>
+                      setFormData({ ...formData, [field]: e.target.value })
+                    }
                     required
                   />
                 </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700">Subject</label>
-                  <input
-                    type="text"
-                    id="subject"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"
-                    value={formData.subject}
-                    onChange={(e) => setFormData({...formData, subject: e.target.value})}
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
-                  <textarea
-                    id="message"
-                    rows={4}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"
-                    value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    required
-                  ></textarea>
-                </div>
-                <button type="submit" className="btn-primary w-full">
-                  Send Message
-                </button>
-              </form>
-            </motion.div>
-          </div>
+              ))}
+              <div>
+                <label htmlFor="message" className="block text-sm font-semibold text-gray-700">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  rows={4}
+                  className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  required
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                className="w-full py-3 px-6 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md shadow-md transition-colors duration-300"
+              >
+                Send Message
+              </button>
+            </form>
+          </motion.div>
         </div>
       </section>
     </main>
