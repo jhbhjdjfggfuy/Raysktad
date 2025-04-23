@@ -25,7 +25,10 @@ export default function Contact() {
 
   return (
     <main className="min-h-screen">
-      <section className="hero-section py-20">
+      <section
+  className="hero-section min-h-screen flex items-center bg-cover bg-center bg-no-repeat relative py-20"
+  style={{backgroundImage: "url('image/bg.jpeg')"}} // replace with your actual image path
+>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl md:text-6xl font-bold text-center text-white">Contact Us</h1>
         </div>

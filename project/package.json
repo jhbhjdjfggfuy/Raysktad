@@ -22,6 +22,7 @@
     "eslint-config-next": "13.5.1",
     "express": "^4.18.2",
     "framer-motion": "^10.16.4",
+    "lucide-react": "^0.503.0",
     "mongoose": "^7.5.2",
     "next": "13.5.1",
     "postcss": "8.4.30",
