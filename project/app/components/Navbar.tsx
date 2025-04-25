@@ -18,25 +18,25 @@ export default function Navbar() {
     { label: 'Contact', path: '/contact' },
   ];
 
-  const linkClasses = (path: string)=>
+  const linkClasses = (path: string) =>
     `font-medium transition duration-300 ${
       pathname === path
-        ? 'text-orange-600'
-        : 'text-gray-700 hover:text-orange-600'
+        ? 'text-white underline underline-offset-4'
+        : 'text-white hover:text-gray-200'
     }`;
 
   return (
-    <nav className="bg-white shadow-md fixed w-full z-50">
+    <nav className="bg-orange-100/30 backdrop-blur-md shadow-md fixed w-full z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
               <Image
-                src="/logo.png"
+                src="/logo2.png"
                 alt="Raysktad Energy"
-                width={140}
-                height={50}
+                width={150}
+                height={100}
                 priority
               />
             </Link>
@@ -55,7 +55,7 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="text-gray-700 hover:text-orange-600 focus:outline-none"
+              className="text-white hover:text-gray-200 focus:outline-none"
             >
               {menuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
@@ -65,7 +65,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-white shadow-md py-4 px-4 space-y-3">
+        <div className="md:hidden bg-orange-500/90 shadow-md py-4 px-4 space-y-3">
           {navItems.map(({ label, path }) => (
             <Link
               key={path}

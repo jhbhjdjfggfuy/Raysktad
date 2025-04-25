@@ -12,6 +12,9 @@ const inter = localFont({
 export const metadata: Metadata = {
   title: 'Raysktad Energy - Moving Energy for Better',
   description: 'Leading energy company in Ghana providing sustainable energy solutions',
+  icons: {
+    icon: '/favi.png', // or .png/.svg
+  },
 };
 
 export default function RootLayout({
