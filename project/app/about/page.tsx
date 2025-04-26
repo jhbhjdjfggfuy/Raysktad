@@ -1,16 +1,32 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 export default function About() {
+  const images = [
+    "/image/bg1.jpeg",
+    "/image/bg2.jpeg",
+    "/image/bg5.jpeg",
+    "/image/bg6.jpg",
+  ];
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <main className="min-h-screen bg-gray-50 text-gray-800">
-      {/* Hero Section */}
+      {/* Hero Section with Slideshow */}
       <section
-        className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat relative"
-        style={{ backgroundImage: "url('/image/bg1.jpeg')" }}
+        className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat relative transition-all duration-1000"
+        style={{ backgroundImage: `url(${images[currentImage]})` }}
       >
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-black/60 transition-opacity duration-1000" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <motion.h1
             initial={{ opacity: 0, y: -30 }}
@@ -20,31 +36,6 @@ export default function About() {
           >
             About <span className="text-yellow-400">Raysktad Energy</span>
           </motion.h1>
-        </div>
-      </section>
-
-      {/* Our Story & Mission */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 border-b-2 border-yellow-400 inline-block">Our Story</h2>
-            <p className="text-lg text-gray-700 leading-relaxed">
-              Raysktad Energy began with a bold ambition—to transform the energy industry in West Africa through innovation and integrity.
-              We've become a trusted partner in Ghana and beyond by delivering quality, safety, and sustainable energy.
-            </p>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 border-b-2 border-yellow-400 inline-block">Our Mission</h2>
-            <p className="text-lg text-gray-700 leading-relaxed mb-4">
-              To provide sustainable and efficient energy services that power progress in communities, industries, and homes across Africa.
-            </p>
-            <ul className="list-disc list-inside space-y-2 text-gray-700">
-              <li>Commitment to safety and quality</li>
-              <li>Empowering communities</li>
-              <li>Driving environmental responsibility</li>
-              <li>Committed to transparent and efficient energy delivery</li>
-            </ul>
-          </motion.div>
         </div>
       </section>
 

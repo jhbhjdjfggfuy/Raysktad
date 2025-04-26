@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   Leaf,
@@ -13,6 +14,22 @@ import {
 } from 'lucide-react';
 
 export default function Sustainability() {
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const images = [
+    '/image/bg1.jpeg',
+    '/image/bg2.jpeg',
+    '/image/bg5.jpeg',
+    '/image/bg6.jpg',
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   const sustainabilityItems = [
     {
       title: "Environmental Impact",
@@ -66,10 +83,10 @@ export default function Sustainability() {
 
   return (
     <main className="min-h-screen bg-gray-50 text-gray-800">
-      {/* Hero Section */}
+      {/* Hero Section with Slideshow */}
       <section
-        className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat relative"
-        style={{ backgroundImage: "url('/image/bg6.jpg')" }}
+        className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat relative transition-all duration-1000"
+        style={{ backgroundImage: `url(${images[currentImage]})` }}
       >
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">

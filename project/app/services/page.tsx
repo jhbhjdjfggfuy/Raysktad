@@ -1,7 +1,18 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Flame, Zap, Warehouse, Headphones, ShieldCheck, Recycle, Truck, PackageCheck } from 'lucide-react';
+import {
+  Flame, Zap, Warehouse, Headphones, ShieldCheck,
+  Recycle, Truck, PackageCheck
+} from 'lucide-react';
+
+const images = [
+  '/image/bg1.jpeg',
+  '/image/bg2.jpeg',
+  '/image/bg5.jpeg',
+  '/image/bg6.jpg'
+];
 
 const services = [
   {
@@ -47,12 +58,21 @@ const services = [
 ];
 
 export default function Services() {
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <main className="min-h-screen bg-gray-50 text-gray-800">
-      {/* Hero */}
+      {/* Hero with Slideshow */}
       <section
-        className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat relative"
-        style={{ backgroundImage: "url('/image/bg4.jpg')" }}
+        className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat relative transition-all duration-1000"
+        style={{ backgroundImage: `url(${images[currentImage]})` }}
       >
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 text-center px-4 max-w-3xl">

@@ -36,7 +36,7 @@ export default function Navbar() {
                 src="/logo2.png"
                 alt="Raysktad Energy"
                 width={150}
-                height={100}
+                height={150}
                 priority
               />
             </Link>
